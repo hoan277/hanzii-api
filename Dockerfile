@@ -15,5 +15,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy file app.py và các file khác
 COPY . /app/
 
-# Lệnh khởi động Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+# Tăng timeout lên 120 giây để Playwright có đủ thời gian hoàn thành
+CMD ["gunicorn", "--bind", "0.0.0.0:10000", "--timeout", "120", "app:app"]
