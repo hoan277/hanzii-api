@@ -1,4 +1,5 @@
 Flask
 beautifulsoup4
-playwright
+selenium
+webdriver-manager
 gunicorn
