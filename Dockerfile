@@ -1,7 +1,5 @@
 # Sử dụng base image Playwright có sẵn Node.js và tất cả các trình duyệt (Chromium, Firefox, WebKit)
-FROM docker pull mcr.microsoft.com/playwright/python:v1.55.0-noble
-
-
+FROM mcr.microsoft.com/playwright/python:v1.55.0-noble
 
 ENV PYTHONUNBUFFERED 1
 
