@@ -5,3 +5,4 @@ webdriver-manager
 gunicorn
 fastapi
 playwright
+uvicorn
