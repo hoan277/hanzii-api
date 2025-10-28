@@ -17,4 +17,5 @@ RUN playwright install
 COPY . /app/
 
 # Tăng timeout lên 120 giây để Playwright có đủ thời gian hoàn thành
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "--timeout", "120", "app:app"]
+CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "app:app"], "--timeout", "120"
+#
