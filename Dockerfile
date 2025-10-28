@@ -10,7 +10,8 @@ WORKDIR /app
 # Image này đã có Python, nên bạn chỉ cần cài đặt các thư viện Flask/gunicorn/bs4
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
-
+# Cài đặt trình duyệt Playwright
+RUN playwright install
 # 2. SAO CHÉP MÃ NGUỒN VÀ KHỞI ĐỘNG
 # Copy file app.py và các file khác
 COPY . /app/
