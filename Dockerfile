@@ -9,7 +9,7 @@ WORKDIR /app
 # 1. CÀI ĐẶT THƯ VIỆN PYTHON
 # Image này đã có Python, nên bạn chỉ cần cài đặt các thư viện Flask/gunicorn/bs4
 COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && gunicorn --version
 # Cài đặt trình duyệt Playwright
 RUN playwright install
 # 2. SAO CHÉP MÃ NGUỒN VÀ KHỞI ĐỘNG
@@ -17,5 +17,4 @@ RUN playwright install
 COPY . /app/
 
 # Tăng timeout lên 120 giây để Playwright có đủ thời gian hoàn thành
-CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "app:app"], "--timeout", "120"
-#
+CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "app:app"]
