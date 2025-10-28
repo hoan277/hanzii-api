@@ -6,6 +6,7 @@ from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
 from typing import List
 import time
+import requests
 
 app = FastAPI()
 
@@ -118,6 +119,27 @@ async def crawl_api(k: List[str] = Query(...)):
 
     return merged
 
+@app.get("/furigana")
+def furigana(word):
+    if not word.strip():
+        print('Không có dữ liệu hợp lệ để gọi API.')
+        return None
+    api_url = "https://kanjikana.com/api/furigana"
+    payload = {
+        "input": word,
+        "lang": "en"
+    }
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+    }
+    response = requests.post(api_url, json=payload, headers=headers)
+    if response.ok:
+        rs = response.json()
+        print(rs)
+        return rs
+    else:
+        print(f'Lỗi API cho từ "{word}": {response.status_code}')
+        return None
 
 if __name__ == "__main__":
     import uvicorn
